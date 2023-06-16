@@ -1,54 +1,54 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <LangVersion>latest</LangVersion>
-    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+	</PropertyGroup>
 
-  
-  <ItemGroup>
-    <AvaloniaResource Include="Assets\**" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="MessageBox.Avalonia" Version="2.3.1-rc1" />
-    <PackageReference Include="Mutagen.Bethesda.FormKeys.SkyrimSE" Version="3.1.0" />
-    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.41.1-pr002" />
-  </ItemGroup>
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Sextant">
-      <HintPath>..\lib\Sextant.Avalonia\Sextant.dll</HintPath>
-    </Reference>
-    <Reference Include="Sextant.Avalonia">
-      <HintPath>..\lib\Sextant.Avalonia\Sextant.Avalonia.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="App.xaml.cs">
-      <DependentUpon>App.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="MessageBox.Avalonia" Version="2.3.1-rc1" />
+		<PackageReference Include="Mutagen.Bethesda.FormKeys.SkyrimSE" Version="3.1.0" />
+		<PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.41.1-pr002" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <AvaloniaXaml Update="App.axaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaXaml>
+	<ItemGroup>
+		<Reference Include="Sextant">
+			<HintPath>..\lib\Sextant.Avalonia\Sextant.dll</HintPath>
+		</Reference>
+		<Reference Include="Sextant.Avalonia">
+			<HintPath>..\lib\Sextant.Avalonia\Sextant.Avalonia.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 
-    <AvaloniaXaml Update="Views\MainView.axaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaXaml>
+	<ItemGroup>
+		<Compile Update="App.xaml.cs">
+			<DependentUpon>App.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\MainView.axaml.cs">
+			<DependentUpon>Views\MainView.axaml.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-    <AvaloniaXaml Update="Framework\Controls\LoadOrderListingView.axaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaXaml>
-  </ItemGroup>
+	<ItemGroup>
+		<AvaloniaXaml Update="App.axaml">
+			<Generator>MSBuild:Compile</Generator>
+		</AvaloniaXaml>
+
+		<AvaloniaXaml Update="Views\MainView.axaml">
+			<Generator>MSBuild:Compile</Generator>
+		</AvaloniaXaml>
+	</ItemGroup>
 </Project>

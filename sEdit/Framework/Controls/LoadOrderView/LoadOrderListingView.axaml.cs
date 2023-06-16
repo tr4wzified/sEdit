@@ -6,7 +6,6 @@ using System.Reactive.Linq;
 namespace sEdit.Framework.Controls
 {
     public partial class LoadOrderListingView : BaseView<LoadOrderListingViewModel> {
-        public ModKey ModKey { get; set; }
         public LoadOrderListingView() : base()
         {
             InitializeComponent();

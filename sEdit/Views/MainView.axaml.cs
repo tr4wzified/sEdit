@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls;
-using Avalonia.ReactiveUI;
+﻿using Avalonia.ReactiveUI;
 using sEdit.Framework;
 using sEdit.ViewModels;
 
