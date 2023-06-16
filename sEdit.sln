@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sEdit", "sEdit\sEdit.csproj", "{643A57BD-AF0E-429B-8CCA-792A7083DA7B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sEdit.Desktop", "sEdit.Desktop\sEdit.Desktop.csproj", "{2C84E63D-A690-4090-AB63-DFEB47D4C9C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{643A57BD-AF0E-429B-8CCA-792A7083DA7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{643A57BD-AF0E-429B-8CCA-792A7083DA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{643A57BD-AF0E-429B-8CCA-792A7083DA7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{643A57BD-AF0E-429B-8CCA-792A7083DA7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C84E63D-A690-4090-AB63-DFEB47D4C9C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C84E63D-A690-4090-AB63-DFEB47D4C9C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C84E63D-A690-4090-AB63-DFEB47D4C9C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C84E63D-A690-4090-AB63-DFEB47D4C9C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81E90547-BE56-4DF1-B787-58082ED336B7}
+	EndGlobalSection
+EndGlobal

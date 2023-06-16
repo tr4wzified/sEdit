@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sextant.Avalonia</name>
+    </assembly>
+    <members>
+        <member name="T:Sextant.Avalonia.DependencyResolverMixins">
+            <summary>
+            Extension methods associated with the IMutableDependencyResolver interface.
+            </summary>
+        </member>
+        <member name="M:Sextant.Avalonia.DependencyResolverMixins.RegisterNavigationView``1(Splat.IMutableDependencyResolver,System.Func{``0})">
+            <summary>
+            Registers a navigation view into the container.
+            </summary>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <param name="navigationViewFactory">The navigation view factory.</param>
+            <typeparam name="TView">The view type.</typeparam>
+            <returns>The dependency resolver for builder use.</returns>
+        </member>
+        <member name="M:Sextant.Avalonia.DependencyResolverMixins.GetNavigationView(Splat.IReadonlyDependencyResolver,System.String)">
+            <summary>
+            Resolves navigation view from a dependency resolver.
+            </summary>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <param name="contract">Optional contract.</param>
+            <returns>The dependency resolver for builder use.</returns>
+        </member>
+        <member name="T:Sextant.Avalonia.NavigationView">
+            <summary>
+            A view used within navigation in Sextant with Avalonia.
+            </summary>
+            <summary>
+            The <see cref="T:Sextant.IView"/> implementation for Avalonia.
+            </summary>
+        </member>
+        <member name="T:Sextant.Avalonia.NavigationView.Navigation">
+            <summary>
+            This class represents a single navigation layer.
+            </summary>
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.Navigation.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.Avalonia.NavigationView.Navigation"/> class.
+            </summary>
+        </member>
+        <member name="P:Sextant.Avalonia.NavigationView.Navigation.IsVisible">
+            <summary>
+            Gets a value indicating whether the control is visible.
+            </summary>
+        </member>
+        <member name="P:Sextant.Avalonia.NavigationView.Navigation.CountChanged">
+            <summary>
+            Gets a the page count.
+            </summary>
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.Navigation.ToggleAnimations(System.Boolean)">
+            <summary>
+            Toggles the animations.
+            </summary>
+            <param name="enable">Returns true if we are enabling the animations.</param>
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.Navigation.Push(ReactiveUI.IViewFor,System.Boolean)">
+            <summary>
+            Adds a <see cref="T:ReactiveUI.IViewFor"/> to the navigation stack.
+            </summary>
+            <param name="view">The view to add to the navigation stack.</param>
+            <param name="resetStack">Defines if we should reset the navigation stack.</param>
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.Navigation.Pop">
+            <summary>
+            Removes the last <see cref="T:ReactiveUI.IViewFor"/> from the navigation stack.
+            </summary>
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.Navigation.PopToRoot">
+            <summary>
+            Removes all pages except the first one <see cref="T:ReactiveUI.IViewFor"/> from the navigation stack.
+            </summary>
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.Avalonia.NavigationView"/> class.
+            </summary>
+        </member>
+        <member name="P:Sextant.Avalonia.NavigationView.Avalonia#Styling#IStyleable#StyleKey">
+            <summary>
+            Gets the style key of a <see cref="T:Avalonia.Controls.ContentControl"/>.
+            </summary>
+        </member>
+        <member name="P:Sextant.Avalonia.NavigationView.MainThreadScheduler">
+            <summary>
+            Gets or sets the scheduler used by the <see cref="T:Sextant.Avalonia.NavigationView"/>.
+            </summary>
+        </member>
+        <member name="P:Sextant.Avalonia.NavigationView.ViewLocator">
+            <summary>
+            Gets or sets the scheduler used by the <see cref="T:Sextant.Avalonia.NavigationView"/>.
+            </summary>
+        </member>
+        <member name="P:Sextant.Avalonia.NavigationView.PagePopped">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.PushPage(Sextant.IViewModel,System.String,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.PopPage(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.PopToRootPage(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.PushModal(Sextant.IViewModel,System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.PopModal">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.Avalonia.NavigationView.Dispose">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

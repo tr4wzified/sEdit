@@ -1,0 +1,792 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sextant</name>
+    </assembly>
+    <members>
+        <member name="T:Sextant.IDestructible">
+            <summary>
+            Interface representing an object capable of being destroyed.
+            </summary>
+        </member>
+        <member name="M:Sextant.IDestructible.Destroy">
+            <summary>
+            Destroy the destructible object.
+            </summary>
+        </member>
+        <member name="T:Sextant.INavigable">
+            <summary>
+            Interface that represents an element that is navigable.
+            </summary>
+        </member>
+        <member name="T:Sextant.INavigated">
+            <summary>
+            An interface that defines methods for when a view mode is navigated to.
+            </summary>
+        </member>
+        <member name="M:Sextant.INavigated.WhenNavigatedTo(Sextant.INavigationParameter)">
+            <summary>
+            An observable sequence that notifies subscribers this item was navigated to.
+            </summary>
+            <param name="parameter">The parameter.</param>
+            <returns>An observable sequence. </returns>
+        </member>
+        <member name="M:Sextant.INavigated.WhenNavigatedFrom(Sextant.INavigationParameter)">
+            <summary>
+            An observable sequence that notifies subscribers this item was navigated from.
+            </summary>
+            <param name="parameter">The parameter.</param>
+            <returns>An observable sequence. </returns>
+        </member>
+        <member name="T:Sextant.INavigating">
+            <summary>
+            An interface that defines methods for when an object is navigating.
+            </summary>
+        </member>
+        <member name="M:Sextant.INavigating.WhenNavigatingTo(Sextant.INavigationParameter)">
+            <summary>
+            Whens the navigating to.
+            </summary>
+            <param name="parameter">The parameter.</param>
+            <returns>An observable sequence.</returns>
+        </member>
+        <member name="T:Sextant.INavigationParameter">
+            <summary>
+            Interface representing a parameter passed during navigation.
+            </summary>
+        </member>
+        <member name="M:Sextant.INavigationParameter.GetValue``1(System.String)">
+            <summary>
+            Gets the value from the navigation parameter.
+            </summary>
+            <param name="key">The key.</param>
+            <typeparam name="T">The type parameter.</typeparam>
+            <returns>The value.</returns>
+        </member>
+        <member name="M:Sextant.INavigationParameter.TryGetValue``1(System.String,``0@)">
+            <summary>
+            Gets the value from the navigation parameter with the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+            <typeparam name="T">The type of the parameter.</typeparam>
+            <returns>A value indicating whether the value exists.</returns>
+        </member>
+        <member name="T:Sextant.IPageViewModel">
+            <summary>
+            Interface that defines a view model for a page for the navigation stack.
+            </summary>
+        </member>
+        <member name="T:Sextant.IParameterViewStackService">
+            <summary>
+            Interface that defines methods for passing parameters on navigation.
+            </summary>
+        </member>
+        <member name="M:Sextant.IParameterViewStackService.PushPage(Sextant.INavigable,Sextant.INavigationParameter,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Pushes the <see cref="T:Sextant.INavigable" /> onto the stack.
+            </summary>
+            <param name="navigableViewModel">The navigable view model.</param>
+            <param name="parameter">The parameter.</param>
+            <param name="contract">The contract.</param>
+            <param name="resetStack">if set to <c>true</c> [reset stack].</param>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IParameterViewStackService.PushPage``1(Sextant.INavigationParameter,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Pushes the <see cref="T:Sextant.INavigable" /> onto the stack.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="parameter">The parameter.</param>
+            <param name="contract">The contract.</param>
+            <param name="resetStack">if set to <c>true</c> [reset stack].</param>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IParameterViewStackService.PushModal(Sextant.INavigable,Sextant.INavigationParameter,System.String,System.Boolean)">
+            <summary>
+            Pushes the <see cref="T:Sextant.IViewModel" /> onto the stack.
+            </summary>
+            <param name="navigableModal">The modal.</param>
+            <param name="parameter">The parameter.</param>
+            <param name="contract">The contract.</param>
+            <param name="withNavigationPage">Value indicating whether to wrap the modal in a navigation page.</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IParameterViewStackService.PushModal``1(Sextant.INavigationParameter,System.String,System.Boolean)">
+            <summary>
+            Pushes the <see cref="T:Sextant.IViewModel" /> onto the stack.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="parameter">The parameter.</param>
+            <param name="contract">The contract.</param>
+            <param name="withNavigationPage">Value indicating whether to wrap the modal in a navigation page.</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IParameterViewStackService.PopPage(Sextant.INavigationParameter,System.Boolean)">
+            <summary>
+            Pops the <see cref="T:Sextant.IViewModel" /> off of the stack.
+            </summary>
+            <param name="parameter">The parameter.</param>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="T:Sextant.IView">
+            <summary>
+            Defines a view that be add to a navigation or modal stack.
+            </summary>
+        </member>
+        <member name="P:Sextant.IView.MainThreadScheduler">
+            <summary>
+            Gets the main thread scheduler for the <see cref="T:Sextant.IView"/> instance.
+            </summary>
+        </member>
+        <member name="P:Sextant.IView.PagePopped">
+            <summary>
+            Gets an observable notifying that a page was popped from the navigation stack.
+            </summary>
+        </member>
+        <member name="M:Sextant.IView.PopModal">
+            <summary>
+            Pops the modal from the modal stack.
+            </summary>
+            <returns>A signal that signals when the pop has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IView.PopPage(System.Boolean)">
+            <summary>
+            Pops the page from the navigation stack.
+            </summary>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the pop has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IView.PopToRootPage(System.Boolean)">
+            <summary>
+            Pops the root page.
+            </summary>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the pop has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IView.PushModal(Sextant.IViewModel,System.String,System.Boolean)">
+            <summary>
+            Pushes the modal onto the modal stack.
+            </summary>
+            <param name="modalViewModel">The modal view model.</param>
+            <param name="contract">The contract.</param>
+            <param name="withNavigationPage">Value indicating whether to wrap the modal in a navigation page.</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IView.PushPage(Sextant.IViewModel,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Pushes the page onto the navigation stack.
+            </summary>
+            <param name="viewModel">The view model.</param>
+            <param name="contract">The contract.</param>
+            <param name="resetStack">if set to <c>true</c> [reset stack].</param>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="T:Sextant.IViewModel">
+            <summary>
+            Interface representing a Sextant view model.
+            </summary>
+        </member>
+        <member name="P:Sextant.IViewModel.Id">
+            <summary>
+            Gets the ID of the page.
+            </summary>
+        </member>
+        <member name="T:Sextant.IViewModelFactory">
+            <summary>
+            Interface that represents a view model factory.
+            </summary>
+        </member>
+        <member name="M:Sextant.IViewModelFactory.Create``1(System.String)">
+            <summary>
+            Creates an instance of the specified view model.
+            </summary>
+            <param name="contract">The contract.</param>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <returns>A view model instance.</returns>
+        </member>
+        <member name="T:Sextant.IViewStackService">
+            <summary>
+            Interface that defines a methods to interact with the navigation stack.
+            </summary>
+        </member>
+        <member name="P:Sextant.IViewStackService.ModalStack">
+            <summary>
+            Gets the modal navigation stack.
+            </summary>
+        </member>
+        <member name="P:Sextant.IViewStackService.PageStack">
+            <summary>
+            Gets the page navigation stack.
+            </summary>
+        </member>
+        <member name="P:Sextant.IViewStackService.View">
+            <summary>
+            Gets the current view on the stack.
+            </summary>
+        </member>
+        <member name="M:Sextant.IViewStackService.PopModal(System.Boolean)">
+            <summary>
+            Pops the <see cref="T:Sextant.INavigable"/> off the stack.
+            </summary>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the pop has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IViewStackService.PopPage(System.Boolean)">
+            <summary>
+            Pops the <see cref="T:Sextant.INavigable"/> off the stack.
+            </summary>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the pop has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IViewStackService.PopToRootPage(System.Boolean)">
+            <summary>
+            Pops to root page.
+            </summary>
+            <param name="animate">If set to <c>true</c> animate.</param>
+            <returns>An observable that signals when the pop has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IViewStackService.PushModal(Sextant.IViewModel,System.String,System.Boolean)">
+            <summary>
+            Pushes the <see cref="T:Sextant.IViewModel"/> onto the stack.
+            </summary>
+            <param name="modal">The modal.</param>
+            <param name="contract">The contract.</param>
+            <param name="withNavigationPage">Value indicating whether to wrap the modal in a navigation page.</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IViewStackService.PushModal``1(System.String,System.Boolean)">
+            <summary>
+            Pushes the <see cref="T:Sextant.INavigable" /> onto the stack.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="contract">The contract.</param>
+            <param name="withNavigationPage">Value indicating whether to wrap the modal in a navigation page.</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IViewStackService.PushPage``1(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Pushes the <see cref="T:Sextant.INavigable" /> onto the stack.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="contract">The contract.</param>
+            <param name="resetStack">if set to <c>true</c> [reset stack].</param>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IViewStackService.PushPage(Sextant.IViewModel,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Pushes the <see cref="T:Sextant.IViewModel"/> onto the stack.
+            </summary>
+            <param name="page">The page.</param>
+            <param name="contract">The contract.</param>
+            <param name="resetStack">if set to <c>true</c> [reset stack].</param>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IViewStackService.PushPage(Sextant.INavigable,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Pushes the <see cref="T:Sextant.INavigable"/> onto the stack.
+            </summary>
+            <param name="page">The page.</param>
+            <param name="contract">The contract.</param>
+            <param name="resetStack">if set to <c>true</c> [reset stack].</param>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the push has been completed.</returns>
+        </member>
+        <member name="M:Sextant.IViewStackService.TopPage">
+            <summary>
+            Returns the top page from the current navigation stack.
+            </summary>
+            <returns>An observable that signals the top page of the stack.</returns>
+        </member>
+        <member name="M:Sextant.IViewStackService.TopModal">
+            <summary>
+            Returns the top modal from the current modal stack.
+            </summary>
+            <returns>An observable that signals the top modal of the stack.</returns>
+        </member>
+        <member name="T:Sextant.DefaultViewModelFactory">
+            <summary>
+            Default View Model Factory.
+            </summary>
+        </member>
+        <member name="M:Sextant.DefaultViewModelFactory.Create``1(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sextant.DependencyResolverMixins">
+            <summary>
+            Extension methods associated with the IMutableDependencyResolver interface.
+            </summary>
+        </member>
+        <member name="P:Sextant.DependencyResolverMixins.NavigationView">
+            <summary>
+            Gets the navigation view key.
+            </summary>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterViewStackService(Splat.IMutableDependencyResolver)">
+            <summary>
+            Registers the view stack service.
+            </summary>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <returns>The dependencyResolver.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterParameterViewStackService(Splat.IMutableDependencyResolver)">
+            <summary>
+            Registers the view stack service.
+            </summary>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <returns>The dependencyResolver.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterViewStackService``1(Splat.IMutableDependencyResolver,System.Func{Sextant.IView,``0})">
+            <summary>
+            Registers the view stack service.
+            </summary>
+            <typeparam name="T">The view stack service type.</typeparam>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <param name="factory">The factory.</param>
+            <returns>The dependencyResolver.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterViewStackService``1(Splat.IMutableDependencyResolver,System.Func{Sextant.IView,Sextant.IViewModelFactory,``0})">
+            <summary>
+            Registers the view stack service.
+            </summary>
+            <typeparam name="T">The view stack service type.</typeparam>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <param name="factory">The factory.</param>
+            <returns>The dependencyResolver.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterViewModelFactory(Splat.IMutableDependencyResolver)">
+            <summary>
+            Registers the view model factory.
+            </summary>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <returns>The dependencyResolver.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterViewModelFactory(Splat.IMutableDependencyResolver,System.Func{Sextant.IViewModelFactory})">
+            <summary>
+            Registers the view model factory.
+            </summary>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <param name="factory">The factory.</param>
+            <returns>The dependencyResolver.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterView``2(Splat.IMutableDependencyResolver,System.String)">
+            <summary>
+            Registers the specified view with the Splat locator.
+            </summary>
+            <typeparam name="TView">The type of the view.</typeparam>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <param name="contract">The contract.</param>
+            <returns>The dependency resolver to use.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterView``2(Splat.IMutableDependencyResolver,System.Func{``0},System.String)">
+            <summary>
+            Registers the specified view with the Splat locator.
+            </summary>
+            <typeparam name="TView">The type of the view.</typeparam>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <param name="viewFactory">The view factory.</param>
+            <param name="contract">The contract.</param>
+            <returns>The dependencyResolver.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterViewModel``1(Splat.IMutableDependencyResolver,System.String)">
+            <summary>
+            Registers the specified viewmodel with the Splat locator.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <param name="contract">The contract.</param>
+            <returns>The dependencyResolver.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterViewModel``1(Splat.IMutableDependencyResolver,System.Func{``0},System.String)">
+            <summary>
+            Registers the specified viewmodel with the Splat locator.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <param name="viewModelFactory">The viewmodel factory.</param>
+            <param name="contract">The contract.</param>
+            <returns>The dependencyResolver.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterViewModel``1(Splat.IMutableDependencyResolver,``0,System.String)">
+            <summary>
+            Registers the specified view model with the Splat locator.
+            </summary>
+            <param name="dependencyResolver">The dependency resolver.</param>
+            <param name="viewModel">The view model.</param>
+            <param name="contract">The contract.</param>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <returns>The dependencyResolver.</returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterViewForNavigation``2(Splat.IMutableDependencyResolver,System.Func{``0},System.Func{``1})">
+            <summary>
+            Registers the provided <see cref="T:ReactiveUI.IViewFor`1" /> to the TViewModel for navigation.
+            </summary>
+            <typeparam name="TView">The view.</typeparam>
+            <typeparam name="TViewModel">The view model.</typeparam>
+            <param name="resolver">The resolver.</param>
+            <param name="viewFactory">The view factory.</param>
+            <param name="viewModelFactory">The view model factory.</param>
+            <returns>
+            The dependency resolver.
+            </returns>
+        </member>
+        <member name="M:Sextant.DependencyResolverMixins.RegisterViewForNavigation``2(Splat.IMutableDependencyResolver,``0,``1)">
+            <summary>
+            Registers the provided <see cref="T:ReactiveUI.IViewFor`1"/> to the TViewModel for navigation.
+            </summary>
+            <param name="resolver">The resolver.</param>
+            <param name="view">The view factory.</param>
+            <param name="viewModel">The view model factory.</param>
+            <typeparam name="TView">The view.</typeparam>
+            <typeparam name="TViewModel">The view model.</typeparam>
+            <returns>The dependency resolver.</returns>
+        </member>
+        <member name="T:Sextant.NavigationParameter">
+            <summary>
+            Represents parameters that can be passed during navigation.
+            </summary>
+            <seealso cref="T:System.Object" />
+            <seealso cref="T:Sextant.INavigationParameter" />
+        </member>
+        <member name="M:Sextant.NavigationParameter.GetValue``1(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.NavigationParameter.TryGetValue``1(System.String,``0@)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sextant.ParameterViewStackService">
+            <summary>
+            <see cref="T:Sextant.IViewStackService"/> implementation that passes <see cref="T:Sextant.INavigationParameter"/> when navigating.
+            </summary>
+            <seealso cref="T:Sextant.ViewStackServiceBase" />
+            <seealso cref="T:Sextant.IViewStackService" />
+        </member>
+        <member name="M:Sextant.ParameterViewStackService.#ctor(Sextant.IView)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.ParameterViewStackService"/> class.
+            </summary>
+            <param name="view">The view.</param>
+        </member>
+        <member name="M:Sextant.ParameterViewStackService.#ctor(Sextant.IView,Sextant.IViewModelFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.ParameterViewStackService"/> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="viewModelFactory">The view model factory.</param>
+        </member>
+        <member name="T:Sextant.ParameterViewStackServiceBase">
+            <summary>
+            Abstract base class for view stack services.
+            </summary>
+        </member>
+        <member name="M:Sextant.ParameterViewStackServiceBase.#ctor(Sextant.IView,Sextant.IViewModelFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.ParameterViewStackServiceBase"/> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="viewModelFactory">The view model factory.</param>
+        </member>
+        <member name="M:Sextant.ParameterViewStackServiceBase.PushPage(Sextant.INavigable,Sextant.INavigationParameter,System.String,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.ParameterViewStackServiceBase.PushModal(Sextant.INavigable,Sextant.INavigationParameter,System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.ParameterViewStackServiceBase.PushPage``1(Sextant.INavigationParameter,System.String,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.ParameterViewStackServiceBase.PushModal``1(Sextant.INavigationParameter,System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.ParameterViewStackServiceBase.PopPage(Sextant.INavigationParameter,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Sextant.ViewModelActionExtensions">
+            <summary>
+            Class of extension method for object life cycle in Sextant.
+            </summary>
+        </member>
+        <member name="M:Sextant.ViewModelActionExtensions.InvokeViewModelAction``1(System.Object,System.Action{``0})">
+            <summary>
+            This is a thing I lifted from Prism.
+            </summary>
+            <param name="viewModel">The view model.</param>
+            <param name="action">An action.</param>
+            <typeparam name="T">A type.</typeparam>
+            <returns>The object.</returns>
+        </member>
+        <member name="T:Sextant.ViewStackService">
+            <summary>
+            Service implementation to handle navigation stack updates.
+            Taken from https://kent-boogaart.com/blog/custom-routing-in-reactiveui and adjusted.
+            </summary>
+            <seealso cref="T:Sextant.IViewStackService" />
+        </member>
+        <member name="M:Sextant.ViewStackService.#ctor(Sextant.IView)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.ViewStackService"/> class.
+            </summary>
+            <param name="view">The view.</param>
+        </member>
+        <member name="M:Sextant.ViewStackService.#ctor(Sextant.IView,Sextant.IViewModelFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.ViewStackService"/> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="viewModelFactory">The view model factory.</param>
+        </member>
+        <member name="T:Sextant.ViewStackServiceBase">
+            <summary>
+            Abstract base class for view stack services.
+            </summary>
+            <seealso cref="T:Sextant.IViewStackService" />
+            <seealso cref="T:System.IDisposable" />
+            <seealso cref="T:Splat.IEnableLogger" />
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.#ctor(Sextant.IView,Sextant.IViewModelFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.ViewStackServiceBase"/> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="viewModelFactory">The view model factory.</param>
+        </member>
+        <member name="P:Sextant.ViewStackServiceBase.ModalStack">
+            <summary>
+            Gets the modal navigation stack.
+            </summary>
+        </member>
+        <member name="P:Sextant.ViewStackServiceBase.PageStack">
+            <summary>
+            Gets the page navigation stack.
+            </summary>
+        </member>
+        <member name="P:Sextant.ViewStackServiceBase.View">
+            <summary>
+            Gets the current view on the stack.
+            </summary>
+        </member>
+        <member name="P:Sextant.ViewStackServiceBase.Logger">
+            <summary>
+            Gets the logger.
+            </summary>
+        </member>
+        <member name="P:Sextant.ViewStackServiceBase.Factory">
+            <summary>
+            Gets the view model factory.
+            </summary>
+        </member>
+        <member name="P:Sextant.ViewStackServiceBase.ModalSubject">
+            <summary>
+            Gets the modal subject.
+            </summary>
+        </member>
+        <member name="P:Sextant.ViewStackServiceBase.PageSubject">
+            <summary>
+            Gets the page subject.
+            </summary>
+        </member>
+        <member name="P:Sextant.ViewStackServiceBase.NavigationDisposables">
+            <summary>
+            Gets the navigation disposables.
+            </summary>
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.PopModal(System.Boolean)">
+            <summary>
+            Pops the <see cref="T:Sextant.INavigable" /> off the stack.
+            </summary>
+            <param name="animate">if set to <c>true</c> [animate].</param>
+            <returns>An observable that signals when the pop is complete.</returns>
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.PopPage(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.PopToRootPage(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.PushModal(Sextant.IViewModel,System.String,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.PushModal``1(System.String,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.PushPage``1(System.String,System.Boolean,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.PushPage(Sextant.IViewModel,System.String,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.PushPage(Sextant.INavigable,System.String,System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.TopModal">
+            <summary>
+            Returns the top modal from the current modal stack.
+            </summary>
+            <returns>An observable that signals the top modal view model.</returns>
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.TopPage">
+            <summary>
+            Returns the top page from the current navigation stack.
+            </summary>
+            <returns>An observable that signals the top page view model.</returns>
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.AddToStackAndTick``1(System.Reactive.Subjects.BehaviorSubject{System.Collections.Immutable.IImmutableList{``0}},``0,System.Boolean)">
+            <summary>
+            Adds to stack and tick.
+            </summary>
+            <typeparam name="T">The view model type.</typeparam>
+            <param name="stackSubject">The stack subject.</param>
+            <param name="item">The item.</param>
+            <param name="reset">if set to <c>true</c> [reset].</param>
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.PopStackAndTick``1(System.Reactive.Subjects.BehaviorSubject{System.Collections.Immutable.IImmutableList{``0}})">
+            <summary>
+            Pops the stack and notifies observers.
+            </summary>
+            <typeparam name="T">The view model type.</typeparam>
+            <param name="stackSubject">The stack subject.</param>
+            <returns>The view model popped.</returns>
+            <exception cref="T:System.InvalidOperationException">Stack is empty.</exception>
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.PopRootAndTick``1(System.Reactive.Subjects.BehaviorSubject{System.Collections.Immutable.IImmutableList{``0}},System.Reactive.Disposables.CompositeDisposable)">
+            <summary>
+            Pops the root and notifies observers.
+            </summary>
+            <typeparam name="T">The view model type.</typeparam>
+            <param name="stackSubject">The stack subject.</param>
+            <param name="disposable">The disposable.</param>
+            <exception cref="T:System.InvalidOperationException">Stack is empty.</exception>
+        </member>
+        <member name="M:Sextant.ViewStackServiceBase.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Sextant.Sextant">
+            <summary>
+            The main registration point for Sextant.
+            </summary>
+        </member>
+        <member name="P:Sextant.Sextant.Instance">
+            <summary>
+            Gets the instance of <see cref="T:Sextant.Sextant"/>.
+            </summary>
+        </member>
+        <member name="P:Sextant.Sextant.MutableLocator">
+            <summary>
+            Gets the mutable dependency resolver.
+            </summary>
+        </member>
+        <member name="T:Sextant.ViewModelFactory">
+            <summary>
+            Helper class which obtains the currently registered IViewModelFactory interface in the Splat dependency service.
+            </summary>
+        </member>
+        <member name="P:Sextant.ViewModelFactory.Current">
+            <summary>
+            Gets the current registered IViewModelFactory interface.
+            </summary>
+            <value>
+            The current.
+            </value>
+            <exception cref="T:Sextant.ViewModelFactoryNotFoundException">Could not find a default ViewModelFactory. This should never happen, your dependency resolver is broken.</exception>
+        </member>
+        <member name="T:Sextant.ViewModelFactoryNotFoundException">
+            <summary>
+            An exception that is thrown if we are unable to find the View Model Factory.
+            </summary>
+        </member>
+        <member name="M:Sextant.ViewModelFactoryNotFoundException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.ViewModelFactoryNotFoundException"/> class.
+            </summary>
+        </member>
+        <member name="M:Sextant.ViewModelFactoryNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.ViewModelFactoryNotFoundException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Sextant.ViewModelFactoryNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.ViewModelFactoryNotFoundException" /> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Sextant.ViewModelFactoryNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Sextant.ViewModelFactoryNotFoundException"/> class.
+            </summary>
+            <param name="serializationInfo">The serialization information.</param>
+            <param name="streamingContext">The streaming context.</param>
+        </member>
+        <member name="T:Sextant.SextantExtensions">
+            <summary>
+            Extensions methods to setup the <see cref="T:Sextant.Sextant"/> instance.
+            </summary>
+        </member>
+        <member name="M:Sextant.SextantExtensions.Initialize(Sextant.Sextant)">
+            <summary>
+            Initializes the specified sextant.
+            </summary>
+            <param name="sextant">The sextant.</param>
+        </member>
+        <member name="T:System.Reactive.Linq.SubscribeSafeExtensions">
+            <summary>
+            Extension methods that provide additional methods for observables.
+            </summary>
+        </member>
+        <member name="M:System.Reactive.Linq.SubscribeSafeExtensions.SubscribeSafe``1(System.IObservable{``0},System.String,System.String,System.Int32)">
+            <summary>
+            Subscribes to an Observable and provides default debugging in the case of an exception.
+            It will provide the caller information as part of the logging.
+            </summary>
+            <typeparam name="T">The type of item signaled as part of the observable.</typeparam>
+            <param name="observable">The observable to subscribe to.</param>
+            <param name="callerMemberName">The name of the caller member.</param>
+            <param name="callerFilePath">The file path of the caller member.</param>
+            <param name="callerLineNumber">The line number of the caller member.</param>
+            <returns>A disposable which when disposed will unsubscribe from the observable.</returns>
+        </member>
+        <member name="T:System.Reactive.Linq.ToSignalExtension">
+            <summary>
+            Extension methods for the IObservable.
+            </summary>
+        </member>
+        <member name="M:System.Reactive.Linq.ToSignalExtension.ToSignal``1(System.IObservable{``0})">
+            <summary>
+            Will convert an observable so that it's value is ignored and converted into just returning <see cref="T:System.Reactive.Unit"/>.
+            This allows us just to be notified when the observable signals.
+            </summary>
+            <typeparam name="T">The current type of the observable.</typeparam>
+            <param name="observable">The observable to convert.</param>
+            <returns>The converted observable.</returns>
+        </member>
+        <member name="T:System.Reactive.Linq.WhereNotNullExtension">
+            <summary>
+            Adds extension methods to the Observable class.
+            </summary>
+        </member>
+        <member name="M:System.Reactive.Linq.WhereNotNullExtension.WhereNotNull``1(System.IObservable{``0})">
+            <summary>
+            Adds a condition to the signaling of an observable which will not fire unless the value is not null.
+            </summary>
+            <typeparam name="T">The type of the observable.</typeparam>
+            <param name="observable">The observable to add the condition to.</param>
+            <returns>An observable which will not signal unless the value is not null.</returns>
+        </member>
+    </members>
+</doc>
