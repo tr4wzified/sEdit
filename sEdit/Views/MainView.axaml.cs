@@ -9,6 +9,7 @@ namespace sEdit.Views
     {
         public MainView() : base()
         {
+            InitializeComponent();
         }
     }
 }

@@ -3,21 +3,12 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
   
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AvaloniaXaml Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaXaml>
-    <AvaloniaResource Include="Views\MainView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +19,8 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
     <PackageReference Include="MessageBox.Avalonia" Version="2.3.1-rc1" />
+    <PackageReference Include="Mutagen.Bethesda.FormKeys.SkyrimSE" Version="3.1.0" />
+    <PackageReference Include="Mutagen.Bethesda.Skyrim" Version="0.41.1-pr002" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,7 +34,21 @@
 
   <ItemGroup>
     <Compile Update="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
+      <DependentUpon>App.axaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Update="App.axaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+
+    <AvaloniaXaml Update="Views\MainView.axaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
+
+    <AvaloniaXaml Update="Framework\Controls\LoadOrderListingView.axaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
   </ItemGroup>
 </Project>
